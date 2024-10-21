@@ -5,11 +5,13 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { TypeUser } from '../enum/typeUserEnum';
 
 @Entity({ name: 'user' })
 export class UserEntity {
-  @PrimaryGeneratedColumn('rowid')
-  id: number;
+
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ name: 'name', nullable: false })
   name: string;
@@ -17,21 +19,20 @@ export class UserEntity {
   @Column({ name: 'email', nullable: false })
   email: string;
 
-  @Column({ name: 'phone' })
-  phone: string;
-
-  @Column({ name: 'cpf', nullable: false })
-  cpf: string;
-
-  @Column({ name: 'password', nullable: false })
+  @Column({ name: 'password' })
   password: string;
 
   @Column({ name: 'type_user', nullable: false })
-  typeUser: number;
+  typeUser: TypeUser;
+
+  @Column('simple-array')
+  roles: string[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  
 }
