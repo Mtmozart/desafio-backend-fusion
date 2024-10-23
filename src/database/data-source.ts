@@ -1,3 +1,4 @@
+import { EnvConfig } from 'src/config/variables';
 import { UserEntity } from 'src/modules/users/entity/user';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
@@ -5,11 +6,11 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 export const dataSourceConfig = (): DataSourceOptions => {
       return {
         type: 'postgres',
-        database: 'start_wars',
-        host: 'localhost',
-        password: String(123),
-        port: Number(process.env.DB_PORT),
-        username: 'postgres',
+        database: EnvConfig.DATABASE.NAME_DB,
+        host: EnvConfig.DATABASE.HOST_DB,
+        password: EnvConfig.DATABASE.PASSWORD_DB,
+        port: EnvConfig.DATABASE.PORT_DB,
+        username: EnvConfig.DATABASE.USER_DB,
         migrations: [`${__dirname}/../migrations/{.ts,*.js}`],
         synchronize: false,  
         entities: [

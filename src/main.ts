@@ -15,6 +15,7 @@ async function bootstrap() {
     .setVersion('Episodio I.')
     .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
     .addTag("User")
+    .addTag("Auth")
     .build()
   const document = SwaggerModule.createDocument(app, config);
 
