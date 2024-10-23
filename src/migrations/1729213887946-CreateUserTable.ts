@@ -8,9 +8,7 @@ export class CreateUserTable1729213887946 implements MigrationInterface {
       CREATE TABLE public.user (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR NOT NULL,
-        email VARCHAR NOT NULL,
-        cpf VARCHAR NOT NULL,
-        phone VARCHAR NOT NULL,
+        email VARCHAR NOT NULL UNIQUE,
         password VARCHAR NOT NULL,
         roles VARCHAR NOT NULL,
         type_user user_type_enum NOT NULL,
