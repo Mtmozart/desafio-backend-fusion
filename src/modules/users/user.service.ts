@@ -23,7 +23,6 @@ export class UserService {
       if (userExistsByEmail) {
         throw new ConflictException('Usuário já cadastrado.');
       }
-
       const user = new UserEntity();
       Object.assign(user, createUserDto);
       

@@ -10,7 +10,7 @@ export class UserResponseDto {
 
   constructor(user: UserEntity){
     this.id = user.id
-    this.name = user.email
+    this.name = user.name
     this.email = user.email
     this.type = user.typeUser.toString()
     this.created_at = user.createdAt
