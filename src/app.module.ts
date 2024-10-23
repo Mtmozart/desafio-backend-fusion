@@ -5,12 +5,14 @@ import { UsersModule } from './modules/users/users.module';
 import { dataSourceConfig } from './database/data-source';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
+import { PlanetModule } from './modules/planet/planet.module';
 
 @Module({
   imports: [
    TypeOrmModule.forRoot(dataSourceConfig() as TypeOrmModuleOptions),
     UsersModule,
-    AuthModule
+    AuthModule,
+    PlanetModule
   ],
   controllers: [AppController],
   providers: [AppService],

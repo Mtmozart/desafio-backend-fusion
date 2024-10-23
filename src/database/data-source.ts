@@ -1,4 +1,5 @@
 import { EnvConfig } from 'src/config/variables';
+import { PlanteEntity } from 'src/modules/planet/entity/plante.entity';
 import { UserEntity } from 'src/modules/users/entity/user';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
@@ -14,7 +15,8 @@ export const dataSourceConfig = (): DataSourceOptions => {
         migrations: [`${__dirname}/../migrations/{.ts,*.js}`],
         synchronize: false,  
         entities: [
-         UserEntity 
+         UserEntity,
+         PlanteEntity
         ]
     }
 }
