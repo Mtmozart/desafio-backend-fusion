@@ -5,6 +5,8 @@ import { GalaxyEntity } from './entity/galaxy.entity';
 import { Repository } from 'typeorm';
 import { CreateGalaxyDto } from './dto/createGalaxy.dto';
 import { TypeUser } from '../users/enum/typeUserEnum';
+import { UpdateGalaxyDto } from './dto/updateGalaxy.dto';
+import { validation } from './utils/validation';
 
 
 @Injectable()
@@ -41,14 +43,72 @@ export class GalaxyService {
   }
 
 
-  async findOne(id: string){
+  async findOne(id: string){    
     const galaxy = await this.galaxyRepository.findOne({
-      where: {id: id}
-    })
+      where: { id: id }, 
+      relations: ['user', 'systems'], 
+    });    
 
     if(!galaxy){
       throw new BadRequestException("Galáxia não cadastrada");
     }
     return galaxy;
+  }
+
+  async findAll(){
+    return this.galaxyRepository.find({
+      relations: ['user', 'systems'], 
+    })
+  }
+
+  async update(galaxyId: string, userId: string, updates: UpdateGalaxyDto){
+
+    try{
+     
+    const galaxy = await this.findOne(galaxyId);
+
+    const user = await this.userService.findOne(userId);
+
+    if(user.typeUser === TypeUser.GRAND_MASTER){      
+      galaxy.name = updates.name
+      return await this.galaxyRepository.save(galaxy);
+    }
+    validation(galaxy, user)
+
+    const galaxyExists = await this.galaxyRepository.findOne({
+      where: {name: updates.name.toLowerCase()}
+    })
+    if(galaxy.name !== updates.name.toLowerCase() && galaxyExists){
+      throw new ConflictException("Galáxia já registrada.")
+    }
+    
+    galaxy.name = updates.name.toLowerCase()
+
+    return await this.galaxyRepository.save(galaxy);
+    } catch(error){
+      throw(error)
+    }
+
+  }
+
+
+  async delete(galaxyId: string, userId: string){
+    try{
+
+    const galaxy = await this.findOne(galaxyId)
+    const user = await this.userService.findOne(userId);
+   
+    if(user.typeUser === TypeUser.GRAND_MASTER){
+      return await this.galaxyRepository.delete(galaxyId);
+    }
+    validation(galaxy, user)
+
+   
+    return await this.galaxyRepository.delete(galaxyId);
+
+    }
+    catch(error){
+      throw(error)
+    }
   }
 }

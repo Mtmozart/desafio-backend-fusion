@@ -1,6 +1,6 @@
 import { SystemEntity } from "src/modules/system/entity/system.entity";
 import { UserEntity } from "src/modules/users/entity/user";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'galaxy' })
 export class GalaxyEntity {
@@ -16,5 +16,12 @@ export class GalaxyEntity {
 
   @OneToMany(() => SystemEntity, (system) => system.galaxy) 
   systems: SystemEntity[]
+
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 
 }
