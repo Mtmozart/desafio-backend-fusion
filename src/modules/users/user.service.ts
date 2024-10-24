@@ -24,8 +24,7 @@ export class UserService {
         throw new ConflictException('Usuário já cadastrado.');
       }
       const user = new UserEntity();
-      Object.assign(user, createUserDto);
-      
+      Object.assign(user, createUserDto);      
 
       user.password = await hashPassword(createUserDto.password);
       user.roles = [];

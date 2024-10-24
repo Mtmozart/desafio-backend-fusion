@@ -6,13 +6,17 @@ import { dataSourceConfig } from './database/data-source';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { PlanetModule } from './modules/planet/planet.module';
+import { GalaxyModule } from './modules/galaxy/galaxy.module';
+import { SystemModule } from './modules/system/system.module';
 
 @Module({
   imports: [
    TypeOrmModule.forRoot(dataSourceConfig() as TypeOrmModuleOptions),
     UsersModule,
     AuthModule,
-    PlanetModule
+    PlanetModule,
+    GalaxyModule,
+    SystemModule
   ],
   controllers: [AppController],
   providers: [AppService],
