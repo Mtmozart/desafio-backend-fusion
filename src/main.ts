@@ -20,10 +20,11 @@ async function bootstrap() {
     .addTag("Galaxy")
     .addTag("System")
     .addTag("Planet")
+    .addTag("Ships")
     .build()
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('api/document', app, document)
+  SwaggerModule.setup('api', app, document)
   appConfig(app)
   await app.listen(3000);
 }

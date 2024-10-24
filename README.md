@@ -1,83 +1,179 @@
 # Desafio BackEnd Fusion: **Criar** e **Gerenciar** a Galáxia Inspirada em Star Wars
 
 ## Objetivo
-Desenvolver uma API backend que permita a criação, gerenciamento e visualização de uma galáxia inspirada em Star Wars, incluindo planetas, sistemas estelares, personagens e naves espaciais.
 
-A API deve ser robusta, segura e eficiente, demonstrando habilidades em desenvolvimento backend.
+Desenvolver uma **API backend** para criar, gerenciar e visualizar uma galáxia inspirada em Star Wars. A API incluirá entidades como **galáxias**, **planetas**, **sistemas estelares**, **personagens** e **naves espaciais**. A aplicação será desenvolvida utilizando **NestJS** ou **Express** com **PostgreSQL** e **TypeORM**. A documentação da API será gerada com **Swagger** e estará disponível em `http://localhost:3000/api`.
 
 ## Requisitos do Projeto
 
 ### Estrutura da API
-- A API deve ser desenvolvida usando Node.js com NestJS ou Express.
 
-- Utilizar TypeScript para tipagem estática. A API deve seguir os princípios RESTful.
+- **Framework:** Node.js utilizando **NestJS**.
+- **Linguagem:** TypeScript para garantir segurança e tipagem estática no código.
+- **Padrão:** A API deve seguir os princípios **RESTful**.
+- **Banco de Dados:** **PostgreSQL** com **TypeORM**.
+- **Documentação:** **Swagger**, acessível via `http://localhost:3000/api`.
 
-### Entidades:
-- Planetas: Nome, clima, terreno, população.
-- Sistemas Estelares: Nome, descrição, lista de planetas.
-- Personagens: Nome, raça, afiliação (Jedi, Sith, Rebelde, etc.), planeta natal.
-- Naves Espaciais: Nome, modelo, fabricante, capacidade de passageiros.
+### Entidades
 
-## EndPoints:
+1. **Galáxia (Galaxy):**
 
-- **Planets**
-  - **POST 📤 /planets:** Criar um novo planeta.
-  - **GET 📥 /planets:** Listar todos os planetas.
-  - **GET 📥 /planets/:id:** Obter detalhes de um planeta específico.
-  - **PUT 🔄 /planets/:id:** Atualizar informações de um planeta.
-  - **DELETE 🗑 /planets/:id:** Deletar um planeta.
+   - `nome`: Nome da galáxia (string).
+   - `descrição`: Descrição da galáxia (string).
+   - `sistemas_estelares`: Lista de sistemas estelares pertencentes à galáxia.
 
-- **Start Systems**
-  - **POST 📤 /star-systems:** Criar um novo sistema estelar.
-  - **GET 📥 /star-systems:** Listar todos os sistemas estelares.
-  - **GET 📥 /star-systems/:id:** Obter detalhes de um sistema estelar específico.
-  - **PUT 🔄 /star-systems/:id:** Atualizar informações de um sistema estelar
-  - **DELETE 🗑 /star-systems/:id**: Deletar um sistema estelar.
+2. **Planetas (Planet):**
 
-- **Characters**
-  - **POST 📤 /characters:** Criar um novo personagem.
-  - **GET 📥 /characters:** Listar todos os personagens.
-  - **GET 📥 /characters/:id:** Obter detalhes de um personagem específico.
-  - **PUT 🔄 /characters/:id:** Atualizar informações de um personagem.
-  - **DELETE 🗑 /characters/:id:** Deletar um personagem.
+   - `nome`: Nome do planeta (string).
+   - `sistema`: Entidade de sistema o qual faz parte, como o universo real onde um planeta geralmente pertence a um sistema solar que pertence a uma galaxia.
+   - `aliança`: Ele faz parte da aliança rebelde, império ou independente.
 
-- **SpaceShips**
-  - **POST 📤 /spaceships:** Criar uma nova nave espacial.
-  - **GET 📥 /spaceships:** Listar todas as naves espaciais.
-  - **GET 📥 /spaceships/:id:** Obter detalhes de uma nave espacial específica.
-  - **PUT 🔄 /spaceships/:id:** Atualizar informações de uma nave espacial.
-  - **DELETE 🗑 /spaceships/:id:** Deletar uma nave espacial.
+3. **Sistemas Estelares (StarSystem):**
+
+   - `nome`: Nome do sistema estelar (string).
+   - `planetas`: Lista de planetas pertencentes ao sistema estelar com array de planetas.
+
+4. **Personagens (Character):**
+
+   - `nome`: Nome do personagem (string).
+   - `afiliação`: Afiliação (Jedi, Sith, Rebelde, etc.) (Enum).
+
+5. **Naves Espaciais (Spaceship):**
+   - `nome`: Nome da nave espacial (string).
+   - `dono`: Dono da nave (ID do personagem).
+
+### Endpoints
+
+#### **Galáxias**
+
+- **POST** `/galaxy`: Criar uma nova galáxia.
+- **GET** `/galaxy/all`: Listar todas as galáxias.
+- **GET** `/galaxy/:id`: Obter detalhes de uma galáxia específica.
+- **PUT** `/galaxy/:id`: Atualizar informações de uma galáxia.
+- **DELETE** `/galaxy/:id`: Deletar uma galáxia.
+
+#### **Planetas**
+
+- **POST** `/planet`: Criar um novo planeta.
+- **GET** `/planet/all`: Listar todos os planetas.
+- **GET** `/planet/:id`: Obter detalhes de um planeta específico.
+- **PUT** `/planet/:id`: Atualizar informações de um planeta.
+- **DELETE** `/planet/:id`: Deletar um planeta.
+
+#### **Sistemas Estelares**
+
+- **POST** `/system`: Criar um novo sistema estelar.
+- **GET** `/system/all`: Listar todos os sistemas estelares.
+- **GET** `/system/:id`: Obter detalhes de um sistema estelar específico.
+- **PUT** `/system/:id`: Atualizar informações de um sistema estelar.
+- **DELETE** `/system/:id`: Deletar um sistema estelar.
+
+#### **Personagens**
+
+- **POST** `/user`: Criar um novo personagem.
+- **GET** `/user/all`: Listar todos os personagens.
+- **GET** `/user/:id`: Obter detalhes de um personagem específico.
+- **PUT** `/user/:id`: Atualizar informações de um personagem.
+- **DELETE** `/user/:id`: Deletar um personagem.
+
+#### **Naves Espaciais**
+
+- **POST** `/ship`: Criar uma nova nave espacial.
+- **GET** `/ship/all`: Listar todas as naves espaciais.
+- **GET** `/ship/:id`: Obter detalhes de uma nave espacial específica.
+- **PUT** `/ship/:id`: Atualizar informações de uma nave espacial.
+- **DELETE** `/ship/:id`: Deletar uma nave espacial.
 
 ### Autenticação e Autorização
-- Implementar autenticação de usuários usando JWT.
-- Os usuários devem ser categorizados com base em afiliações como Jedi, Sith, Rebeldes, etc.
-- Proteger os endpoints para que apenas usuários autenticados possam criar, atualizar e deletar dados.
+
+- Implementar autenticação com **JWT** (JSON Web Token).
+- Proteger endpoints para que **apenas usuários autenticados** possam criar, atualizar ou deletar dados, sendo em alguns casos restritos para usuários de nível mais baixo e permissão para grão mestres.
 
 ### Banco de Dados
-- Usar qualquer banco de dados, relacional ou não-relacional.
-- Utilizar qualquer ORM de sua escolha.
 
-### Validação e Tratamento de Erros
-- Implementar validação de dados de entrada.Gerenciar e retornar mensagens de erro apropriadas.
+- **PostgreSQL** será utilizado como banco de dados, com **TypeORM** como ORM para mapear as entidades.
 
-### Documentação da API (Opcional):
-- Documentar a API usando Swagger ou Postman (não obrigatória).
-- Incluir exemplos de requisições e respostas (schemas).
+### Configuração do Banco de Dados com **TypeORM**
 
-### Testes (Opcional):
-- Escrever testes unitários e de integração para a API usando Jest (não obrigatória).
+```typescript
+// Exemplo de configuração TypeORM em ormconfig.json
+export const dataSourceConfig = (): DataSourceOptions => {
+  return {
+    type: 'postgres',
+    database: EnvConfig.DATABASE.NAME_DB,
+    host: EnvConfig.DATABASE.HOST_DB,
+    password: EnvConfig.DATABASE.PASSWORD_DB,
+    port: EnvConfig.DATABASE.PORT_DB,
+    username: EnvConfig.DATABASE.USER_DB,
+    migrations: [`${__dirname}/../migrations/{.ts,*.js}`],
+    synchronize: false,
+    entities: [
+      UserEntity,
+      PlanetEntity,
+      GalaxyEntity,
+      SystemEntity,
+      ShipEntity,
+    ],
+  };
+};
 
-### Tecnologias e Ferramentas
-- Linguagens: TypeScriptFrameworks: NestJS ou Express
+const datasource = new DataSource(dataSourceConfig());
 
-### Extras:
-- Deploy: Hospedar a API em um serviço como Heroku, AWS, ou DigitalOcean.
-- Logs e Monitoramento: Implementar logs e monitoramento para a API usando ferramentas como Winston ou Morgan.
+export default datasource;
+```
 
-### Submissão
-- Repositório GitHub: Submeter o código em um repositório público no GitHub.
+### Exemplo de Modelos de Entidades com **TypeORM**
 
-### Documentação:
-- Incluir um README.md detalhado com instruções de instalação, uso e qualquer informação relevante.
-- Demo: Fornecer um link para a API hospedada e a documentação.
-- Prazo prazo para submissão é de 15 dias  partir da data de início.
+**Galáxia (Galaxy.entity.ts)**
+
+```typescript
+@Entity({ name: 'user' })
+export class UserEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column({ name: 'name', nullable: false })
+  name: string;
+
+  @Column({ name: 'email', nullable: false, unique: true })
+  email: string;
+
+  @Column({ name: 'password' })
+  password: string;
+
+  @Column({ name: 'type_user', nullable: false })
+  typeUser: TypeUser;
+
+  @Column('simple-array')
+  roles: string[];
+
+  @OneToMany(() => GalaxyEntity, (galaxy) => galaxy.user)
+  galaxies: GalaxyEntity[];
+
+  @OneToMany(() => SystemEntity, (system) => system.user)
+  systems: SystemEntity[];
+
+  @OneToMany(() => PlanetEntity, (planet) => planet.user)
+  planets: PlanetEntity[];
+
+  @OneToMany(() => ShipEntity, (ship) => ship.user)
+  ships: ShipEntity[];
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
+}
+```
+
+### Documentação da API com Swagger
+
+- O **Swagger** estará disponível no endpoint `http://localhost:3000/api`.
+- Para habilitar o Swagger no NestJS, adicione o seguinte código no arquivo principal (`main.ts`):
+
+### Validação de Dados e Tratamento de Erros
+
+- Utilizar **class-validator** para validar entradas no NestJS, com retornos de erro apropriados como por exemplo:
+  - `400 Bad Request` para dados inválidos.
+  - `404 Not Found` quando uma entidade não for encontrada.

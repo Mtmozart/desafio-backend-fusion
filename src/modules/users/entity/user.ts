@@ -10,6 +10,7 @@ import { TypeUser } from '../enum/typeUserEnum';
 import { SystemEntity } from 'src/modules/system/entity/system.entity';
 import { GalaxyEntity } from 'src/modules/galaxy/entity/galaxy.entity';
 import { PlanetEntity } from 'src/modules/planet/entity/planet.entity';
+import { ShipEntity } from 'src/modules/ship/entity/Ship.entity';
 
 @Entity({ name: 'user' })
 export class UserEntity {
@@ -34,15 +35,15 @@ export class UserEntity {
 
   @OneToMany(() => GalaxyEntity, galaxy => galaxy.user)
   galaxies: GalaxyEntity[];
-
   
   @OneToMany(() => SystemEntity, system => system.user)
   systems: SystemEntity[];
-
   
   @OneToMany(() => PlanetEntity, planet => planet.user)
   planets: PlanetEntity[];
 
+  @OneToMany(() => ShipEntity, ship => ship.user)
+  ships: ShipEntity[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

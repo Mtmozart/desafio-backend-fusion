@@ -8,8 +8,6 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "migration:run": "npx typeorm migration:run src/database/data-source.ts",
-    "migration:create": "npx typeorm migration:create src/database/migrations/",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",

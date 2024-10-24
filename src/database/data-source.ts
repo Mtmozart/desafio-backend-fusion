@@ -1,6 +1,7 @@
 import { EnvConfig } from 'src/config/variables';
 import { GalaxyEntity } from 'src/modules/galaxy/entity/galaxy.entity';
 import { PlanetEntity } from 'src/modules/planet/entity/planet.entity';
+import { ShipEntity } from 'src/modules/ship/entity/Ship.entity';
 import { SystemEntity } from 'src/modules/system/entity/system.entity';
 import { UserEntity } from 'src/modules/users/entity/user';
 import { DataSource, DataSourceOptions } from 'typeorm';
@@ -20,7 +21,8 @@ export const dataSourceConfig = (): DataSourceOptions => {
          UserEntity,
          PlanetEntity,
          GalaxyEntity,
-         SystemEntity
+         SystemEntity,
+         ShipEntity
         ]
     }
 }

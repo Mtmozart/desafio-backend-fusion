@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { PlanetModule } from './modules/planet/planet.module';
 import { GalaxyModule } from './modules/galaxy/galaxy.module';
 import { SystemModule } from './modules/system/system.module';
+import { ShipModule } from './modules/ship/ship.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { SystemModule } from './modules/system/system.module';
     AuthModule,
     PlanetModule,
     GalaxyModule,
-    SystemModule
+    SystemModule,
+    ShipModule
   ],
   controllers: [AppController],
   providers: [AppService],
