@@ -36,7 +36,18 @@ Desenvolver uma **API backend** para criar, gerenciar e visualizar uma galáxia 
 4. **Personagens (Character):**
 
    - `nome`: Nome do personagem (string).
-   - `afiliação`: Afiliação (Jedi, Sith, Rebelde, etc.) (Enum).
+   - `afiliação`: Afiliação (Jedi, Sith, Rebelde, etc.) (Enum), conforme listado para poder criar o usuário:
+
+   ```typescript
+   export enum TypeUser {
+     YOUNGLING = 'youngling',
+     PADAWAN = 'padawan',
+     JEDI = 'jedi',
+     GRAND_MASTER = 'grand_master',
+     DARTH = 'darth',
+     LORD_SITH = 'lord_sith',
+   }
+   ```
 
 5. **Naves Espaciais (Spaceship):**
    - `nome`: Nome da nave espacial (string).
@@ -96,7 +107,6 @@ Desenvolver uma **API backend** para criar, gerenciar e visualizar uma galáxia 
 ### Configuração do Banco de Dados com **TypeORM**
 
 ```typescript
-// Exemplo de configuração TypeORM em ormconfig.json
 export const dataSourceConfig = (): DataSourceOptions => {
   return {
     type: 'postgres',
@@ -177,3 +187,18 @@ export class UserEntity {
 - Utilizar **class-validator** para validar entradas no NestJS, com retornos de erro apropriados como por exemplo:
   - `400 Bad Request` para dados inválidos.
   - `404 Not Found` quando uma entidade não for encontrada.
+
+### Migrações e start
+
+Deve primeiro fazer um `npm run start`, depois cancelar e fazer o comando para o migrate: `npx typeorm migration:run -d dist/database/data-source.js`.
+
+## tecnologias gerais:
+
+`typescript`;
+`nest`;
+`jwt`;
+`bcrypt`;
+`Postgres`;
+`TypeOrm`;
+`Node`;
+`Swagger`;
